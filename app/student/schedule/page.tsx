@@ -5,11 +5,11 @@ import { Shell } from "@/components/layout/Shell";
 import { Card } from "@/components/ui/Card";
 import { getStudentDashboardData } from "@/lib/queries/student";
 
-const daysOrder = ["Samedi", "Dimanche", "Lundi", "Mardi", "Mercredi", "Jeudi"];
+const daysOrder = ["Dimanche", "Lundi", "Mardi", "Mercredi", "Jeudi"];
 
 // Créneaux fixes de l'école
 const timeRanges = [
-  "8:30 - 10:30",
+  "08:30 - 10:30",
   "10:45 - 12:30",
   "13:30 - 15:30",
   "15:45 - 17:30",
