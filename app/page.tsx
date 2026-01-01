@@ -23,12 +23,12 @@ const roles: Role[] = [
     description: "Consulter vos cours, notes et communications.",
     accent: "from-cyan-400 to-sky-500",
   },
-  {
-    id: "administration",
-    label: "Administration",
-    description: "Piloter l’activité globale et les indicateurs.",
-    accent: "from-amber-400 to-orange-500",
-  },
+  // {
+  //   id: "administration",
+  //   label: "Administration",
+  //   description: "Piloter l’activité globale et les indicateurs.",
+  //   accent: "from-amber-400 to-orange-500",
+  // },
   {
     id: "etudiant",
     label: "Étudiant",
