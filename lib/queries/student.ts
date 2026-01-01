@@ -37,6 +37,17 @@ type NotesSummary = {
 
 type AbsencesCount = {
   total: number;
+  percentage: number; // pondéré entre TD et TP (cours exclus)
+};
+
+// New: detailed absence rows (adapt column names if your schema differs)
+type Absence = {
+  id: number;
+  date: string; // DATE or TIMESTAMPTZ -> text via to_char if needed
+  module_name: string | null;
+  session_type: string | null;
+  reason: string | null;
+  justified: boolean;
 };
 
 type Announcement = {
@@ -155,11 +166,89 @@ export async function getStudentDashboardData(studentId: number) {
   };
 
   // 4) Absences
+  // Total absences (toutes séances confondues : cours + TD + TP)
   const absRes = await query<{ total: number }>(
     `SELECT COUNT(*)::int AS total FROM absences WHERE student_id = $1`,
     [studentId]
   );
-  const absencesCount = absRes.rows[0] || { total: 0 };
+  const rawAbs = absRes.rows[0] || { total: 0 };
+
+  // Total absences TD (session_type commençant par 'TD')
+  const tdAbsRes = await query<{ total: number }>(
+    `
+    SELECT COUNT(*)::int AS total
+    FROM absences
+    WHERE student_id = $1
+      AND session_type ILIKE 'TD%'
+    `,
+    [studentId]
+  );
+  const rawTdAbs = tdAbsRes.rows[0] || { total: 0 };
+
+  // Total absences TP (session_type commençant par 'TP')
+  const tpAbsRes = await query<{ total: number }>(
+    `
+    SELECT COUNT(*)::int AS total
+    FROM absences
+    WHERE student_id = $1
+      AND session_type ILIKE 'TP%'
+    `,
+    [studentId]
+  );
+  const rawTpAbs = tpAbsRes.rows[0] || { total: 0 };
+
+  // Seuils max (à ajuster selon vos règles internes)
+  const MAX_ALLOWED_TD_ABSENCES: number = 30;
+  const MAX_ALLOWED_TP_ABSENCES: number = 30;
+
+  const tdPercentage =
+    MAX_ALLOWED_TD_ABSENCES === 0
+      ? 0
+      : Math.min(
+          100,
+          Math.round((rawTdAbs.total / MAX_ALLOWED_TD_ABSENCES) * 100)
+        );
+
+  const tpPercentage =
+    MAX_ALLOWED_TP_ABSENCES === 0
+      ? 0
+      : Math.min(
+          100,
+          Math.round((rawTpAbs.total / MAX_ALLOWED_TP_ABSENCES) * 100)
+        );
+
+  // Pondération entre TD et TP (ici 50/50, à adapter si besoin)
+  const TD_WEIGHT = 0.5;
+  const TP_WEIGHT = 0.5;
+
+  const percentage = Math.min(
+    100,
+    Math.round(TD_WEIGHT * tdPercentage + TP_WEIGHT * tpPercentage)
+  );
+
+  const absencesCount: AbsencesCount = {
+    total: rawAbs.total,
+    percentage, // basé uniquement sur TD/TP
+  };
+
+  // New: detailed absences history
+  const absHistoryRes = await query<Absence>(
+    `
+    SELECT
+      id,
+      -- adapt column names if needed: date/absence_date/created_at...
+      to_char(date, 'YYYY-MM-DD') AS date,
+      module_name,
+      session_type,
+      reason,
+      COALESCE(justified, false) AS justified
+    FROM absences
+    WHERE student_id = $1
+    ORDER BY date DESC, id DESC
+    `,
+    [studentId]
+  );
+  const absencesHistory = absHistoryRes.rows;
 
   // 5) Announcements (global + targeted by class/speciality)
   const annRes = await query<Announcement>(
@@ -203,6 +292,7 @@ export async function getStudentDashboardData(studentId: number) {
     schedule,
     notesSummary,
     absencesCount,
+    absencesHistory,
     announcements,
     academicProgress,
     holidaysProgress,
