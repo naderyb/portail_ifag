@@ -86,17 +86,6 @@ export async function getStudentDashboardData(studentId: number) {
     throw new Error(`Student ${studentId} not found`);
   }
 
-  console.log("Student schedule lookup", {
-    className: student.class_name,
-    groupName: student.group_name,
-  });
-
-  // DEBUG: how many schedule rows does the app DB actually see?
-  const { rows: scheduleCountRows } = await query<{ count: number }>(
-    `SELECT COUNT(*)::int AS count FROM public.schedule`
-  );
-  console.log("Schedule total rows in app DB", scheduleCountRows[0]?.count);
-
   // Use the same SQL logic as your working StudentSchedulePage, but parameterized
   const { rows: rawScheduleRows } = await query<ScheduleSlot>(
     `
@@ -114,7 +103,6 @@ export async function getStudentDashboardData(studentId: number) {
     `,
     [student.class_name, student.group_name]
   );
-  console.log("Class+group schedule rowCount", rawScheduleRows.length);
 
   // Same normalization as in your page component
   const schedule: ScheduleSlot[] = rawScheduleRows.map((s) => ({
@@ -122,20 +110,6 @@ export async function getStudentDashboardData(studentId: number) {
     day: s.day.trim(),
     start: s.start.slice(0, 5),
   }));
-
-  // Debug each schedule entry
-  schedule.forEach((entry) => {
-    console.log("CHECK", entry.day, entry.start, entry);
-  });
-
-  console.table(
-    schedule.map((s) => ({
-      day: s.day,
-      start: s.start,
-      end: s.end,
-      subject: s.subject,
-    }))
-  );
 
   // 3) Notes summary (unchanged, just uses notes table)
   const notesRes = await query<{
