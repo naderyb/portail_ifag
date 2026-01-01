@@ -196,23 +196,6 @@ async function StudentDashboard() {
                 </div>
               </div>
             </Card>
-
-            <Card title="Emploi du temps (Samedi → Jeudi)">
-              <ScheduleTable
-                slots={schedule.map((slot) => ({
-                  ...slot,
-                  room: slot.room ?? "",
-                }))}
-              />
-              <div className="mt-4 flex justify-end">
-                <ExpandScheduleButton
-                  schedule={schedule.map((slot) => ({
-                    ...slot,
-                    room: slot.room ?? "",
-                  }))}
-                />
-              </div>
-            </Card>
           </div>
 
           {/* Right column */}
