@@ -87,7 +87,7 @@ async function StudentSchedulePage() {
           </Card>
         </div>
 
-        <div className="flex gap-4">
+        <div className="flex flex-col gap-4 md:flex-row">
           {/* Desktop sidebar */}
           <aside className="hidden w-52 shrink-0 md:block">
             <Card>
@@ -106,7 +106,7 @@ async function StudentSchedulePage() {
           </aside>
 
           {/* Main content */}
-          <main className="flex-1 space-y-6">
+          <main className="min-w-0 flex-1 space-y-6">
             <Card>
               <div className="flex flex-col gap-2 text-xs text-slate-300 md:flex-row md:items-center md:justify-between">
                 <div>
@@ -121,8 +121,8 @@ async function StudentSchedulePage() {
                 </div>
                 <div className="mt-2 flex flex-wrap gap-2 md:mt-0">
                   <span className="rounded-full border border-slate-700/70 bg-slate-900/70 px-3 py-1 text-[11px] text-slate-200">
-                    Les créneaux d&apos;aujourd&apos;hui sont mis en avant dans le
-                    planning.
+                    Les créneaux d&apos;aujourd&apos;hui sont mis en avant dans
+                    le planning.
                   </span>
                 </div>
               </div>
@@ -134,17 +134,17 @@ async function StudentSchedulePage() {
                   Aucun créneau n&apos;est planifié pour le moment.
                 </p>
               ) : (
-                <div className="overflow-x-auto">
-                  <table className="min-w-full border-collapse text-[11px]">
+                <div className="w-full overflow-x-auto">
+                  <table className="w-full border-collapse text-[11px]">
                     <thead>
                       <tr>
-                        <th className="w-32 border border-slate-700 bg-slate-900/80 px-2 py-2 text-left font-semibold text-slate-100">
+                        <th className="sticky left-0 z-10 min-w-[80px] border border-slate-700 bg-slate-900/80 px-2 py-2 text-left font-semibold text-slate-100">
                           Date / Jour
                         </th>
                         {timeRanges.map((range) => (
                           <th
                             key={range}
-                            className="border border-slate-700 bg-slate-900/80 px-2 py-2 font-semibold text-slate-100"
+                            className="min-w-[140px] whitespace-nowrap border border-slate-700 bg-slate-900/80 px-2 py-2 font-semibold text-slate-100"
                           >
                             {range}
                           </th>
@@ -162,14 +162,13 @@ async function StudentSchedulePage() {
                         return (
                           <tr key={day}>
                             <td
-                              className={`border border-slate-700 px-2 py-3 align-top text-xs ${
+                              className={`sticky left-0 z-10 min-w-[80px] border border-slate-700 px-2 py-3 align-top text-xs ${
                                 isToday
                                   ? "bg-slate-900/90 font-semibold text-sky-200"
                                   : "bg-slate-900/60 text-slate-200"
                               }`}
                             >
                               <div>{day}</div>
-                              {/* Vous pouvez afficher ici une vraie date si vous la stockez */}
                             </td>
                             {timeRanges.map((range) => {
                               const cellSlots = daySlots[range] ?? [];
@@ -213,8 +212,8 @@ async function StudentSchedulePage() {
                 </div>
               )}
               <p className="mt-3 text-[10px] italic text-slate-500">
-                Le présent programme peut subir des modifications ou des changements
-                en fonction de la disponibilité des enseignants.
+                Le présent programme peut subir des modifications ou des
+                changements en fonction de la disponibilité des enseignants.
               </p>
             </Card>
           </main>
