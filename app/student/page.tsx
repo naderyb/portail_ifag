@@ -9,7 +9,6 @@ import dynamic from "next/dynamic";
 import { getStudentDashboardData } from "@/lib/queries/student";
 import { Suspense } from "react";
 import { ProgressCircles } from "@/components/student/ProgressCircles";
-import { ExpandScheduleButton } from "@/components/student/ExpandScheduleButton";
 import { ExpandStatsButton } from "@/components/student/ExpandStatsButton";
 
 const Confetti = dynamic(() => import("react-confetti"), { ssr: false });
@@ -28,6 +27,8 @@ async function StudentDashboard() {
     academicProgress,
     holidaysProgress,
   } = data;
+
+  const apiSchedule = schedule;
 
   const holidaysPercent = Math.round(holidaysProgress.percentage);
   const academicPercent = Math.round(academicProgress.percentage);
@@ -284,6 +285,18 @@ async function StudentDashboard() {
                   </p>
                 </div>
               </div>
+            </Card>
+
+            <Card title="Emploi du temps">
+              {/* small debug info to be sure data reaches the UI */}
+              <p className="mb-2 text-[11px] text-slate-400">
+                {apiSchedule.length
+                  ? `${apiSchedule.length} créneaux trouvés`
+                  : "Aucun créneau trouvé pour votre classe/groupe."}
+              </p>
+
+              {/* Pass the schedule coming from the API */}
+              <ScheduleTable slots={apiSchedule} />
             </Card>
           </div>
         </div>
