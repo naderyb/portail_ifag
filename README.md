@@ -395,11 +395,14 @@ npm run dev
 
 ## 10. Crédits & gouvernance de projet
 
-- **Chef de projet** : **Youb Mahmoud Nader**
+- **Chef de projet** : **Youb Mahmoud Nader** (`@naderyb`, <youb.nader@gmail.com>)
+- **Responsable IA** : **Djouahed Mariya** (`@mrydhr`, <maried0061@gmail.com>)
+- **Designer UI/UX** : **Mohabeddine Kenza** (<kenzamohabeddine@gmail.com>)
+- **Designer Prototype** : **Ouchaou Sara Amilya** (<ouchaousarah5@gmail.com>)
+- **Testeur UI/UX** : **Ferguen Amel** (<syremcici@gmail.com>)
+
 - **Type** : Projet universitaire – module _Gestion de Projet_
 - **But** : Démontrer un MVP fonctionnel, documenté, extensible, servant de base pour un portail universitaire complet.
-
-Les autres membres de l’équipe seront ajoutés ultérieurement dans cette section (rôles : développeurs backend, frontend, responsable QA, etc.).
 
 ---
 
@@ -546,10 +549,13 @@ Le projet a démontré la faisabilité d’un MVP fonctionnel et documenté, ave
 
 ## 14. Crédits
 
-- **Chef de projet** : **Youb Mahmoud Nader**
+- **Chef de projet** : **Youb Mahmoud Nader** (`@naderyb`, <youb.nader@gmail.com>)
+- **Responsable IA** : **Djouahed Mariya** (`@mrydhr`, <maried0061@gmail.com>)
+- **Designer UI/UX** : **Mohabeddine Kenza** (<kenzamohabeddine@gmail.com>)
+- **Designer Prototype** : **Ouchaou Sara Amilya** (<ouchaousarah5@gmail.com>)
+- **Testeur UI/UX** : **Ferguen Amel** (<syremcici@gmail.com>)
+
 - **Type** : Projet universitaire – module _Gestion de Projet_
 - **But** : Démontrer un MVP fonctionnel, documenté, extensible, servant de base pour un portail universitaire complet.
-
-Les autres membres de l’équipe seront ajoutés ultérieurement dans cette section (rôles : développeurs backend, frontend, responsable QA, etc.).
 
 ---
