@@ -400,3 +400,57 @@ npm run dev
 - **But** : Démontrer un MVP fonctionnel, documenté, extensible, servant de base pour un portail universitaire complet.
 
 Les autres membres de l’équipe seront ajoutés ultérieurement dans cette section (rôles : développeurs backend, frontend, responsable QA, etc.).
+
+---
+
+## 11. Planification du projet – Diagrammes PERT & Gantt
+
+### 11.1 Diagramme PERT (vue dépendances de tâches)
+
+```mermaid
+flowchart LR
+    A[Étude de faisabilité] --> B[Cadrage & objectifs du MVP]
+    B --> C[Analyse des besoins\n(fonctionnels & non-fonctionnels)]
+    C --> D[Modélisation\n(UML, MCD, flux)]
+    D --> E[Architecture technique\n(Frontend, Backend, BDD, IA)]
+
+    E --> F[Implémentation backend API]
+    E --> G[Implémentation frontend Next.js]
+
+    F --> H[Intégration base de données\n(PostgreSQL)]
+    G --> I[Intégration espace étudiant\n(dashboard, emploi du temps)]
+
+    H --> J[Tests d'intégration\n(front + back + BDD)]
+    I --> J
+
+    J --> K[Préparation MVP & démo\n(portail universitaire)]
+    K --> L[Documentation finale\n(README, diagrammes, livrables)]
+```
+
+### 11.2 Diagramme de Gantt (planning prévisionnel)
+
+```mermaid
+gantt
+    dateFormat  YYYY-MM-DD
+    title       Portail IFAG – Planning prévisionnel (exemple)
+
+    section Cadrage
+    Étude de faisabilité                 :a1, 2024-02-01, 5d
+    Cadrage & objectifs du MVP           :a2, after a1, 5d
+
+    section Analyse & Conception
+    Analyse des besoins                  :b1, after a2, 7d
+    Modélisation (UML / MCD / flux)      :b2, after b1, 7d
+    Architecture technique globale       :b3, after b2, 5d
+
+    section Réalisation
+    Implémentation backend API           :c1, after b3, 10d
+    Implémentation frontend Next.js      :c2, after b3, 12d
+    Intégration base PostgreSQL          :c3, after c1, 5d
+    Intégration espace étudiant          :c4, after c2, 5d
+
+    section Validation & Livraison
+    Tests & corrections                   :d1, after c3, 7d
+    Préparation MVP & démo                :d2, after d1, 3d
+    Documentation & remise finale         :d3, after d2, 3d
+```
