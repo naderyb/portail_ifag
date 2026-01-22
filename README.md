@@ -207,22 +207,22 @@ classDiagram
 
 ```mermaid
 flowchart LR
-    A[Connexion étudiant<br/>(SSO / Auth)]
-    A --> B[Chargement page<br/>student]
+    A["Connexion étudiant<br/>SSO et Auth"]
+    A --> B["Chargement page<br/>student"]
 
-    B --> C[Appel getStudentDashboardData]
+    B --> C["Appel getStudentDashboardData"]
     C --> D[(PostgreSQL)]
     D --> C
-    C --> E[Affichage dashboard<br/>Notes, progression, annonces]
+    C --> E["Affichage dashboard<br/>Notes, progression, annonces"]
 
-    E --> F[Navigation vers page<br/>student/schedule]
-    F --> G[Appel API emploi du temps]
+    E --> F["Navigation vers page<br/>student schedule"]
+    F --> G["Appel API emploi du temps"]
     G --> D
     D --> G
-    G --> H[Tableau des créneaux<br/>+ jour courant mis en avant]
+    G --> H["Tableau des créneaux<br/>Jour courant mis en avant"]
 
-    E --> I[Interaction IA future<br/>(chatbot, FAQ)]
-    I --> J[Service IA / LLM]
+    E --> I["Interaction IA future<br/>chatbot, FAQ"]
+    I --> J["Service IA LLM"]
     J --> D
 ```
 
