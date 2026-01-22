@@ -195,7 +195,7 @@ async function StudentSchedulePage() {
                                             {slot.teacher}
                                           </div>
                                           <div className="mt-0.5 text-[10px] text-slate-100/80">
-                                            Salle {slot.room}
+                                            Salle {slot.room ?? "-"}
                                           </div>
                                         </div>
                                       ))}
