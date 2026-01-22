@@ -409,22 +409,25 @@ Les autres membres de l’équipe seront ajoutés ultérieurement dans cette sec
 
 ```mermaid
 flowchart LR
-    A[Étude de faisabilité] --> B[Cadrage & objectifs du MVP]
-    B --> C[Analyse des besoins\n(fonctionnels & non-fonctionnels)]
-    C --> D[Modélisation\n(UML, MCD, flux)]
-    D --> E[Architecture technique\n(Frontend, Backend, BDD, IA)]
+    A["Étude de faisabilité"] --> B["Cadrage et objectifs du MVP"]
 
-    E --> F[Implémentation backend API]
-    E --> G[Implémentation frontend Next.js]
+    B --> C["Analyse des besoins<br/>fonctionnels et non fonctionnels"]
 
-    F --> H[Intégration base de données\n(PostgreSQL)]
-    G --> I[Intégration espace étudiant\n(dashboard, emploi du temps)]
+    C --> D["Modélisation<br/>UML, MCD, flux"]
 
-    H --> J[Tests d'intégration\n(front + back + BDD)]
+    D --> E["Architecture technique<br/>Frontend, Backend, BDD, IA"]
+
+    E --> F["Implémentation backend API"]
+    E --> G["Implémentation frontend Next.js"]
+
+    F --> H["Intégration base de données<br/>PostgreSQL"]
+    G --> I["Intégration espace étudiant<br/>Dashboard et emploi du temps"]
+
+    H --> J["Tests d'intégration<br/>Front, Back et Base de données"]
     I --> J
 
-    J --> K[Préparation MVP & démo\n(portail universitaire)]
-    K --> L[Documentation finale\n(README, diagrammes, livrables)]
+    J --> K["Préparation MVP et démonstration<br/>Portail universitaire"]
+    K --> L["Documentation finale<br/>README, diagrammes, livrables"]
 ```
 
 ### 11.2 Diagramme de Gantt (planning prévisionnel)
