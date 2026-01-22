@@ -5,7 +5,7 @@ export type ScheduleSlot = {
   start: string;
   end: string;
   subject: string;
-  room: string;
+  room: string | null;
   teacher: string;
 };
 
@@ -73,7 +73,7 @@ export function ScheduleTable({ slots }: Props) {
                   </div>
                   <div className="mt-0.5 flex justify-between gap-2 text-[10px] text-slate-400">
                     <span className="truncate">{s.teacher}</span>
-                    <span className="whitespace-nowrap">Salle {s.room}</span>
+                    <span className="whitespace-nowrap">Salle {s.room ?? "N/A"}</span>
                   </div>
                 </div>
               ))
