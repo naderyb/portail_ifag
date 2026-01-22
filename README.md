@@ -207,19 +207,19 @@ classDiagram
 
 ```mermaid
 flowchart LR
-    A[Connexion étudiant\n(SSO / Auth)] --> B[Chargement /student]
+    A[Connexion étudiant<br/>(SSO / Auth)] --> B[Chargement /student]
     B --> C[Appel getStudentDashboardData]
     C --> D[(PostgreSQL)]
     D --> C
-    C --> E[Affichage dashboard\nNotes, progression, annonces]
+    C --> E[Affichage dashboard<br/>Notes, progression, annonces]
 
-    E --> F[Navigation vers\n/student/schedule]
+    E --> F[Navigation vers<br/>/student/schedule]
     F --> G[Appel API emploi du temps]
     G --> D
     D --> G
-    G --> H[Tableau des créneaux\n+ mise en avant du jour courant]
+    G --> H[Tableau des créneaux<br/>+ mise en avant du jour courant]
 
-    E --> I[Future interaction IA\n(chatbot, FAQ)]
+    E --> I[Future interaction IA<br/>(chatbot, FAQ)]
     I --> J[Service IA / LLM]
     J --> D
 ```
@@ -235,7 +235,7 @@ erDiagram
       string matricule
     }
 
-    CLASS {
+    ACADEMIC_CLASS {
       uuid id
       string name
       string level
@@ -243,7 +243,7 @@ erDiagram
       string promotion_name
     }
 
-    "GROUP" {
+    STUDENT_GROUP {
       uuid id
       string name
     }
@@ -251,8 +251,8 @@ erDiagram
     SCHEDULE_SLOT {
       uuid id
       string day
-      time start
-      time end
+      string start_time
+      string end_time
       string subject
       string type
       string teacher
@@ -273,24 +273,24 @@ erDiagram
     ABSENCE {
       uuid id
       date date
-      bool justified
+      boolean justified
     }
 
     ANNOUNCEMENT {
       uuid id
       string title
-      text content
+      string content
       datetime published_at
     }
 
     STUDENT ||--o{ GRADE : "reçoit"
     MODULE ||--o{ GRADE : "est noté par"
     STUDENT ||--o{ ABSENCE : "possède"
-    CLASS ||--o{ SCHEDULE_SLOT : "planifie"
-    "GROUP" ||--o{ SCHEDULE_SLOT : "assiste"
-    CLASS ||--o{ STUDENT : "regroupe"
-    "GROUP" ||--o{ STUDENT : "regroupe"
-    CLASS ||--o{ ANNOUNCEMENT : "émet"
+    ACADEMIC_CLASS ||--o{ SCHEDULE_SLOT : "planifie"
+    STUDENT_GROUP ||--o{ SCHEDULE_SLOT : "assiste"
+    ACADEMIC_CLASS ||--o{ STUDENT : "regroupe"
+    STUDENT_GROUP ||--o{ STUDENT : "regroupe"
+    ACADEMIC_CLASS ||--o{ ANNOUNCEMENT : "émet"
 ```
 
 ---
@@ -311,17 +311,17 @@ Le projet prévoit (ou héberge) un **service IA** dans un dossier dédié (`ai-
 ```mermaid
 flowchart LR
     subgraph Frontend
-      ChatUI[UI d'assistant IA\n(chat / panneau latéral)]
+      ChatUI[UI d'assistant IA<br/>(chat / panneau latéral)]
     end
 
     subgraph AI-Backend["ai-backend"]
       Controller[Endpoint HTTP /chat]
-      ContextBuilder[Construction du contexte\n(données étudiant, cours)]
-      PromptEngine[Génération de prompt\n& post-traitement]
+      ContextBuilder[Construction du contexte<br/>(données étudiant, cours)]
+      PromptEngine[Génération de prompt<br/>& post-traitement]
     end
 
     subgraph LLM-Cloud["Service LLM (cloud)"]
-      LLMModel[(Modèle de langage\nmulti-couches)]
+      LLMModel[(Modèle de langage<br/>multi-couches)]
     end
 
     ChatUI --> Controller
