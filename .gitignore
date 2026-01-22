@@ -4,9 +4,19 @@
 /node_modules
 /.pnp
 .pnp.js
-
+/ai-backend/venv/__pycache__/
+/ai-backend/venv/services/migrations/__pycache__/
+/ai-backend/venv/lib/
+/ai-backend/venv/include/
+/ai-backend/venv/Scripts/
+/ai-backend/venv/services/__pycache__/
+/venv
+/.venv
+/__pycache__
+*.cfg
 # testing
 /coverage
+
 
 # next.js
 /.next/
