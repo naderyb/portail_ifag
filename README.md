@@ -207,19 +207,21 @@ classDiagram
 
 ```mermaid
 flowchart LR
-    A[Connexion étudiant<br/>(SSO / Auth)] --> B[Chargement /student]
+    A[Connexion étudiant<br/>(SSO / Auth)]
+    A --> B[Chargement page<br/>student]
+
     B --> C[Appel getStudentDashboardData]
     C --> D[(PostgreSQL)]
     D --> C
     C --> E[Affichage dashboard<br/>Notes, progression, annonces]
 
-    E --> F[Navigation vers<br/>/student/schedule]
+    E --> F[Navigation vers page<br/>student/schedule]
     F --> G[Appel API emploi du temps]
     G --> D
     D --> G
-    G --> H[Tableau des créneaux<br/>+ mise en avant du jour courant]
+    G --> H[Tableau des créneaux<br/>+ jour courant mis en avant]
 
-    E --> I[Future interaction IA<br/>(chatbot, FAQ)]
+    E --> I[Interaction IA future<br/>(chatbot, FAQ)]
     I --> J[Service IA / LLM]
     J --> D
 ```
@@ -311,16 +313,16 @@ Le projet prévoit (ou héberge) un **service IA** dans un dossier dédié (`ai-
 ```mermaid
 flowchart LR
     subgraph Frontend
-      ChatUI[UI d'assistant IA<br/>(chat / panneau latéral)]
+      ChatUI["UI assistant IA<br/>chat — panneau latéral"]
     end
 
-    subgraph AI-Backend["ai-backend"]
-      Controller[Endpoint HTTP /chat]
-      ContextBuilder[Construction du contexte<br/>(données étudiant, cours)]
-      PromptEngine[Génération de prompt<br/>& post-traitement]
+    subgraph AI_Backend["ai-backend"]
+      Controller["Endpoint HTTP<br/>chat"]
+      ContextBuilder["Construction du contexte<br/>données étudiant, cours"]
+      PromptEngine["Génération de prompt<br/>et post-traitement"]
     end
 
-    subgraph LLM-Cloud["Service LLM (cloud)"]
+    subgraph LLM_Cloud["Service LLM cloud"]
       LLMModel[(Modèle de langage<br/>multi-couches)]
     end
 
