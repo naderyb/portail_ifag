@@ -423,22 +423,26 @@ Le projet a été réalisé sur **10 semaines** effectives. La **réalisation te
 
 ```mermaid
 flowchart LR
-    A[Étude de faisabilité<br/>(Sem. 1)] --> B[Cadrage & objectifs MVP<br/>(Sem. 1)]
-    B --> C[Analyse des besoins<br/>(Sem. 2)]
-    C --> D[Modélisation (UML, MCD, flux)<br/>(Sem. 3)]
-    D --> E[Architecture technique globale<br/>(Sem. 3–4)]
+    A["Étude de faisabilité<br/>Semaine 1"]
+        --> B["Cadrage et objectifs MVP<br/>Semaine 1"]
 
-    E --> F[Dev Backend API<br/>(Sem. 4–6)]
-    E --> G[Dev Frontend Next.js<br/>(Sem. 4–6)]
-    E --> H[Conception & dev LLM<br/>(Sem. 4–7)]
+    B --> C["Analyse des besoins<br/>Semaine 2"]
 
-    F --> I[Intégration BDD + API<br/>(Sem. 6–7)]
+    C --> D["Modélisation<br/>UML, MCD, flux<br/>Semaine 3"]
+
+    D --> E["Architecture technique globale<br/>Semaines 3 à 4"]
+
+    E --> F["Développement Backend API<br/>Semaines 4 à 6"]
+    E --> G["Développement Frontend Next.js<br/>Semaines 4 à 6"]
+    E --> H["Conception et développement LLM<br/>Semaines 4 à 7"]
+
+    F --> I["Intégration Base de données et API<br/>Semaines 6 à 7"]
     G --> I
 
-    H --> J[Tests d'intégration & corrections<br/>(Sem. 8–9)]
+    H --> J["Tests d'intégration et corrections<br/>Semaines 8 à 9"]
     I --> J
 
-    J --> K[Documentation & soutenance MVP<br/>(Sem. 10)]
+    J --> K["Documentation et soutenance MVP<br/>Semaine 10"]
 ```
 
 **Lecture (exemples)**
