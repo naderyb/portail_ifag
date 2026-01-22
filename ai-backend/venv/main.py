@@ -2,7 +2,6 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from schemas import ChatRequest, ChatResponse
 from services.llm import ask_llm
-from datetime import datetime, timedelta
 import os
 import psycopg2
 from psycopg2.extras import RealDictCursor
@@ -17,13 +16,13 @@ app = FastAPI()
 
 # Allow your Next.js frontend
 origins = [
-    "http://localhost:3000",
-    "https://ifagation.vercel.app"
+    os.getenv("url_frontend_localhost"),
+    os.getenv("url_frontend_production")
 ]
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=origins,
+    allow_origins=[origin for origin in origins if origin],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
