@@ -403,9 +403,141 @@ Les autres membres de l’équipe seront ajoutés ultérieurement dans cette sec
 
 ---
 
-## 11. Planification du projet – Diagrammes PERT & Gantt
+## 11. Planification du projet – PERT, Gantt & histogramme de charge
 
-### 11.1 Diagramme PERT (vue dépendances de tâches)
+Le projet a été réalisé sur **10 semaines** effectives. La **réalisation technique** (frontend + backend) et surtout la **conception / implémentation du LLM** ont représenté la charge la plus importante.
+
+- **Diagramme PERT** : visualise les **dépendances logiques** entre tâches, met en évidence le **chemin critique**.
+- **Diagramme de Gantt** : visualise le **calendrier** (qui fait quoi, quand, et pendant combien de temps).
+- **Histogramme de charge** : dérivé du Gantt, il montre la **répartition de l’effort** par phase.
+
+### 11.1 Hypothèses de planning (10 semaines)
+
+- Horizon : **10 semaines** (S1 → S10).
+- 1 semaine ≈ 5 jours ouvrés (valeur indicative).
+- Certaines tâches sont **en parallèle** (frontend / backend, LLM / autres).
+- Le **chemin critique** est dominé par :  
+  _Analyse → Conception → Dev LLM / Intégration → Tests → Clôture_.
+
+### 11.2 Diagramme PERT (dépendances, 10 semaines)
+
+```mermaid
+flowchart LR
+    A[Étude de faisabilité<br/>(Sem. 1)] --> B[Cadrage & objectifs MVP<br/>(Sem. 1)]
+    B --> C[Analyse des besoins<br/>(Sem. 2)]
+    C --> D[Modélisation (UML, MCD, flux)<br/>(Sem. 3)]
+    D --> E[Architecture technique globale<br/>(Sem. 3–4)]
+
+    E --> F[Dev Backend API<br/>(Sem. 4–6)]
+    E --> G[Dev Frontend Next.js<br/>(Sem. 4–6)]
+    E --> H[Conception & dev LLM<br/>(Sem. 4–7)]
+
+    F --> I[Intégration BDD + API<br/>(Sem. 6–7)]
+    G --> I
+
+    H --> J[Tests d'intégration & corrections<br/>(Sem. 8–9)]
+    I --> J
+
+    J --> K[Documentation & soutenance MVP<br/>(Sem. 10)]
+```
+
+**Lecture (exemples)**
+
+- On ne commence pas la **modélisation** (D) avant l’**analyse des besoins** (C).
+- Le **dev LLM** (H) dépend de l’**architecture** (E) et s’étale sur **3 semaines** (4→7).
+- La **livraison du MVP** (K) dépend des **tests** (J) → c’est la fin du **chemin critique**.
+
+### 11.3 Diagramme de Gantt (10 semaines, vue calendrier)
+
+Exemple de Gantt aligné sur 10 semaines (dates indicatives, l’important est la durée relative).
+
+```mermaid
+gantt
+    dateFormat  YYYY-MM-DD
+    title       Portail IFAG – Planning sur 10 semaines (exemple)
+
+    section Cadrage & analyse
+    Étude de faisabilité + cadrage        :a1, 2024-02-05, 7d
+    Analyse des besoins                   :a2, after a1, 7d
+
+    section Conception
+    Modélisation (UML, MCD, flux)         :b1, after a2, 7d
+    Architecture technique globale        :b2, after b1, 7d
+
+    section Réalisation
+    Dev Backend API                       :c1, 2024-03-04, 21d
+    Dev Frontend Next.js                  :c2, 2024-03-04, 21d
+    Conception & dev LLM + intégration IA :crit, c3, 2024-03-11, 21d
+
+    section Intégration & tests
+    Intégration BDD + API                 :d1, after c1, 5d
+    Tests d'intégration & corrections     :d2, after d1, 7d
+
+    section Clôture
+    Documentation & préparation soutenance :e1, after d2, 5d
+```
+
+- Les tâches **backend** et **frontend** démarrent en parallèle à partir de la semaine 4.
+- Le **bloc LLM** (`crit`) est volontairement long (≈ 3 semaines) pour refléter le temps important passé sur cette partie.
+- L’ensemble du planning tient dans un horizon d’environ **10 semaines**.
+
+### 11.4 Histogramme de charge (dérivé du Gantt)
+
+Histogramme simplifié de la **charge par grande phase** (en semaines-homme approximatives) :
+
+| Phase                                  | Durée approx. (sem.) | Charge relative | Représentation visuelle |
+| -------------------------------------- | -------------------- | --------------- | ----------------------- |
+| Cadrage & analyse                      | 2                    | Moyenne         | ████████                |
+| Modélisation & architecture            | 2                    | Moyenne         | ████████                |
+| Dev Backend API                        | 3                    | Importante      | ██████████████          |
+| Dev Frontend Next.js                   | 3                    | Importante      | ██████████████          |
+| Conception & dev LLM + intégration IA  | 3                    | Très élevée     | ████████████████████    |
+| Intégration BDD + API                  | 1                    | Faible          | ████                    |
+| Tests d'intégration & corrections      | 1                    | Moyenne         | █████                   |
+| Documentation & préparation soutenance | 1                    | Moyenne         | █████                   |
+
+On voit clairement que :
+
+- La **réalisation technique** (backend + frontend) consomme une grande partie des 10 semaines.
+- Le **LLM** représente un **pic de charge** (conception, expérimentations, intégration au backend).
+
+### 11.5 Interprétation des diagrammes (vue Gestion de Projet)
+
+- **PERT** : utile pour identifier le **chemin critique** (suite de tâches qui déterminent la durée minimale du projet) et les tâches pouvant être décalées sans impacter la date de fin.
+- **Gantt** : permet de **communiquer le planning** à l’équipe (visibilité sur les chevauchements et les jalons).
+- **Histogramme de charge** : permet de vérifier que la **charge de travail est réaliste**, d’anticiper les **pics** (ici sur le LLM) et d’ajuster la répartition des ressources si besoin.
+
+---
+
+## 12. Conclusion
+
+Le projet a démontré la faisabilité d’un MVP fonctionnel et documenté, avec une architecture modulaire et extensible. Le **LLM** a représenté un point de tension important, mais le planning et la conception ont permis de le gérer efficacement. Le portail est maintenant prêt à être étendu aux enseignants et services pédagogiques.
+
+---
+
+## 13. Recommandations
+
+- **Étendre le portail** aux enseignants et services pédagogiques.
+- **Intégrer un assistant IA** plus sophistiqué (LLM avec contexte, mémoire, etc.).
+- **Renforcer la sécurité** (auth, rôles, audit).
+- **Internationalisation** (fr / en).
+- **Documentation complète** (README, diagrammes, livrables).
+
+---
+
+## 14. Crédits
+
+- **Chef de projet** : **Youb Mahmoud Nader**
+- **Type** : Projet universitaire – module _Gestion de Projet_
+- **But** : Démontrer un MVP fonctionnel, documenté, extensible, servant de base pour un portail universitaire complet.
+
+Les autres membres de l’équipe seront ajoutés ultérieurement dans cette section (rôles : développeurs backend, frontend, responsable QA, etc.).
+
+---
+
+## 15. Planification du projet – Diagrammes PERT & Gantt
+
+### 15.1 Diagramme PERT (vue dépendances de tâches)
 
 ```mermaid
 flowchart LR
@@ -430,7 +562,7 @@ flowchart LR
     K --> L["Documentation finale<br/>README, diagrammes, livrables"]
 ```
 
-### 11.2 Diagramme de Gantt (planning prévisionnel)
+### 15.2 Diagramme de Gantt (planning prévisionnel)
 
 ```mermaid
 gantt
