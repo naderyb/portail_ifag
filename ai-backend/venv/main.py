@@ -18,7 +18,7 @@ app = FastAPI()
 # Allow your Next.js frontend
 origins = [
     "http://localhost:3000",
-    # "https://ifagation.vercel.app"
+    "https://ifagation.vercel.app"
 ]
 
 app.add_middleware(
