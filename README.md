@@ -54,21 +54,21 @@ flowchart LR
     end
 
     subgraph Frontend["Frontend Next.js (portail_ifag)"]
-        P1[/Pages App Router\n/student, /student/schedule/]
-        C1[Composants UI\nShell, Card, ScheduleTable...]
+        P1[/Pages App Router<br/>/student, /student/schedule/]
+        C1[Composants UI<br/>Shell, Card, ScheduleTable...]
     end
 
     subgraph Backend["Backend API applicatif"]
-        API[(REST / GraphQL API)\nNEXT_PUBLIC_API_URL]
+        API[(REST / GraphQL API<br/>NEXT_PUBLIC_API_URL)]
     end
 
     subgraph DB["Base de données PostgreSQL"]
-        DBMain[(Schéma académique\nÉtudiants, Classes, Groupes,\nModules, Notes, Absences...)]
+        DBMain[(Schéma académique<br/>Étudiants, Classes, Groupes,<br/>Modules, Notes, Absences...)]
     end
 
     subgraph AI["Service IA (ai-backend)"]
         LLMCore[(Moteur LLM)]
-        Orchestrator[Orchestrateur de prompts\n& contexte]
+        Orchestrator[Orchestrateur de prompts<br/>& contexte]
     end
 
     UI --> P1
