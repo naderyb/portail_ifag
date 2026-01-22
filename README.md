@@ -295,6 +295,45 @@ erDiagram
     ACADEMIC_CLASS ||--o{ ANNOUNCEMENT : "émet"
 ```
 
+### 6.4 Diagramme de cas d'utilisation (Vue fonctionnelle)
+
+```mermaid
+usecaseDiagram
+actor Etudiant as Student
+actor Enseignant as Teacher
+actor "Administration / Service pédagogique" as Admin
+actor "Assistant IA" as Assistant
+
+rectangle "Portail IFAG" {
+  usecase UC1 as "Consulter tableau de bord"
+  usecase UC2 as "Consulter emploi du temps"
+  usecase UC3 as "Consulter notes"
+  usecase UC4 as "Consulter absences"
+  usecase UC5 as "Consulter annonces"
+  usecase UC6 as "Interagir avec l'assistant IA"
+  usecase UC7 as "Gérer notes"
+  usecase UC8 as "Gérer absences"
+  usecase UC9 as "Publier annonces"
+  usecase UC10 as "Gérer classes, groupes,\ncalendriers"
+}
+
+Student --> UC1
+Student --> UC2
+Student --> UC3
+Student --> UC4
+Student --> UC5
+Student --> UC6
+
+Teacher --> UC7
+Teacher --> UC8
+Teacher --> UC9
+
+Admin --> UC9
+Admin --> UC10
+
+Assistant --> UC6
+```
+
 ---
 
 ## 7. Composant IA – LLM et architecture
