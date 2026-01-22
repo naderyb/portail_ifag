@@ -503,19 +503,16 @@ Histogramme simplifié de la **charge par grande phase** (en semaines-homme appr
 #### 11.4.1 Graphe de répartition de la charge (histogramme)
 
 ```mermaid
-chart
-    title: Répartition de la charge par phase (en "semaines équivalentes")
-    type: bar
-    xAxisTitle: Phases du projet
-    yAxisTitle: Semaines équivalentes
-    "Cadrage & analyse": 2
-    "Modélisation & architecture": 2
-    "Dev Backend API": 3
-    "Dev Frontend Next.js": 3
-    "Conception & dev LLM + IA": 3
-    "Intégration BDD + API": 1
-    "Tests intégration & corrections": 1
-    "Documentation & soutenance": 1
+pie title Répartition de la charge par phase (semaines équivalentes)
+    "Cadrage & analyse" : 2
+    "Modélisation & architecture" : 2
+    "Dev Backend API" : 3
+    "Dev Frontend Next.js" : 3
+    "Conception & dev LLM + IA" : 3
+    "Intégration BDD + API" : 1
+    "Tests intégration & corrections" : 1
+    "Documentation & soutenance" : 1
+
 ```
 
 On voit clairement que :
