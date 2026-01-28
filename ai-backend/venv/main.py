@@ -22,7 +22,11 @@ origins = [
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=[origin for origin in origins if origin],
+    allow_origins=[
+        "http://localhost:3000",        # Next.js local
+        "http://127.0.0.1:000",        # sometimes used
+        "https://ifagation.vercel.app", # your deployed frontend
+    ],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
