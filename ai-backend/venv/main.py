@@ -113,6 +113,7 @@ def chat(req: ChatRequest):
         )
 
         # 3️⃣ Call LLM
+        print("LLM KEY:", os.getenv("GOOGLE_API_KEY"))
         reply = ask_llm(full_prompt)
         return {"reply": reply}
 
