@@ -1,8 +1,11 @@
+export const dynamic = "force-dynamic";
+
 import { NextResponse } from "next/server";
 import { Pool } from "pg";
 
 const pool = new Pool({
-  connectionString: process.env.DATABASE_URL, ssl: { rejectUnauthorized: false }
+  connectionString: process.env.DATABASE_URL,
+  ssl: { rejectUnauthorized: false },
 });
 
 export async function GET(request: Request) {
@@ -40,6 +43,9 @@ export async function GET(request: Request) {
     return NextResponse.json({ data: rows });
   } catch (error) {
     console.error("[GET /api/schedule]", error);
-    return NextResponse.json({ error: "Unable to fetch schedule" }, { status: 500 });
+    return NextResponse.json(
+      { error: "Unable to fetch schedule" },
+      { status: 500 },
+    );
   }
 }
