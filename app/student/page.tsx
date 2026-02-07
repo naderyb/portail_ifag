@@ -6,15 +6,12 @@ import { Card } from "@/components/ui/Card";
 import { ProgressBar } from "@/components/ui/ProgressBar";
 import { BadgePill } from "@/components/ui/BadgePill";
 import { ScheduleTable } from "@/components/student/ScheduleTable";
-import NextDynamic from "next/dynamic";
 import { getStudentDashboardData } from "@/lib/queries/student";
-import { Suspense } from "react";
+import ConfettiClient from "@/components/student/ConfettiClient";
 import { ProgressCircles } from "@/components/student/ProgressCircles";
 import { ExpandStatsButton } from "@/components/student/ExpandStatsButton";
 
-const Confetti = NextDynamic(() => import("react-confetti"), { ssr: false });
-
-async function StudentDashboard() {
+export default async function StudentDashboard() {
   // Assume authenticated student 3ndo id=1, wra exam nbdlha.
   const studentId = 1;
   const data = await getStudentDashboardData(studentId);
@@ -55,14 +52,7 @@ async function StudentDashboard() {
       ]}
     >
       <div className="relative">
-        {academicPercent >= 95 && (
-          <Confetti
-            width={typeof window !== "undefined" ? window.innerWidth : 1200}
-            height={280}
-            numberOfPieces={180}
-            recycle={false}
-          />
-        )}
+        {academicPercent >= 95 && <ConfettiClient />}
 
         <div className="grid gap-6 md:grid-cols-[minmax(0,2fr)_minmax(0,1.3fr)]">
           {/* Left column */}
@@ -306,10 +296,4 @@ async function StudentDashboard() {
   );
 }
 
-export default function StudentPage() {
-  return (
-    <Suspense fallback={<div className="text-slate-200">Chargement...</div>}>
-      <StudentDashboard />
-    </Suspense>
-  );
-}
+// Page is exported directly as the async StudentDashboard component.
