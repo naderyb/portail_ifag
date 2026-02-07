@@ -1,3 +1,4 @@
+export const dynamic = "force-dynamic";
 export const runtime = "nodejs";
 
 import { Shell } from "@/components/layout/Shell";
@@ -5,16 +6,16 @@ import { Card } from "@/components/ui/Card";
 import { ProgressBar } from "@/components/ui/ProgressBar";
 import { BadgePill } from "@/components/ui/BadgePill";
 import { ScheduleTable } from "@/components/student/ScheduleTable";
-import dynamic from "next/dynamic";
+import NextDynamic from "next/dynamic";
 import { getStudentDashboardData } from "@/lib/queries/student";
 import { Suspense } from "react";
 import { ProgressCircles } from "@/components/student/ProgressCircles";
 import { ExpandStatsButton } from "@/components/student/ExpandStatsButton";
 
-const Confetti = dynamic(() => import("react-confetti"), { ssr: false });
+const Confetti = NextDynamic(() => import("react-confetti"), { ssr: false });
 
 async function StudentDashboard() {
-  // Assume authenticated student; for now a fixed test UUID or numeric id.
+  // Assume authenticated student 3ndo id=1, wra exam nbdlha.
   const studentId = 1;
   const data = await getStudentDashboardData(studentId);
 

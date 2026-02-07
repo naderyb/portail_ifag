@@ -1,3 +1,4 @@
+export const dynamic = "force-dynamic";
 export const runtime = "nodejs";
 
 import { Suspense } from "react";
@@ -9,9 +10,8 @@ import Link from "next/link";
 async function StudentProfilePage() {
   // Idéalement récupéré depuis l'auth
   const studentId = 1;
-  const { student, academicProgress } = await getStudentDashboardData(
-    studentId
-  );
+  const { student, academicProgress } =
+    await getStudentDashboardData(studentId);
 
   const initials = student.full_name
     .split(" ")

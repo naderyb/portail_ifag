@@ -1,3 +1,4 @@
+export const dynamic = "force-dynamic";
 export const runtime = "nodejs";
 
 import { Suspense } from "react";
@@ -23,7 +24,7 @@ async function AdministrationDashboardPage() {
       ), 0)::text AS total_collected,
       (SELECT COUNT(*)::int FROM payments WHERE status = 'pending') AS pending,
       (SELECT COUNT(*)::int FROM payments WHERE status = 'failed')  AS overdue
-    `
+    `,
   );
   const paymentStatsRow = paymentStatsRows[0] || {
     total_collected: "0",
@@ -47,7 +48,7 @@ async function AdministrationDashboardPage() {
       (SELECT COUNT(*)::int FROM admin_requests WHERE status = 'pending') AS pending_administrative_requests,
       (SELECT COUNT(*)::int FROM admin_requests WHERE status = 'pending' AND request_type = 'Relevé papier') AS transcripts_paper_pending,
       (SELECT COUNT(*)::int FROM admin_requests WHERE status = 'pending' AND request_type = 'Duplicata') AS duplicates_pending
-    `
+    `,
   );
   const requestStatsRow = requestStatsRows[0] || {
     pending_administrative_requests: 0,
@@ -82,7 +83,7 @@ async function AdministrationDashboardPage() {
     LEFT JOIN v_student_profile sp ON sp.id = p.student_id
     ORDER BY p.payment_date DESC, p.id DESC
     LIMIT 5
-    `
+    `,
   );
 
   const latestPayments = latestPaymentsRows.map((p) => ({
@@ -116,7 +117,7 @@ async function AdministrationDashboardPage() {
     LEFT JOIN v_student_profile sp ON sp.id = ar.student_id
     ORDER BY ar.submitted_at DESC, ar.id DESC
     LIMIT 5
-    `
+    `,
   );
 
   const latestRequests = latestRequestsRows.map((r) => ({
@@ -127,8 +128,8 @@ async function AdministrationDashboardPage() {
       r.status === "approved"
         ? "Traité"
         : r.status === "rejected"
-        ? "Rejeté"
-        : "En cours",
+          ? "Rejeté"
+          : "En cours",
     date: r.date,
   }));
 
@@ -198,10 +199,10 @@ async function AdministrationDashboardPage() {
                     Vue globale • Administration
                   </p>
                   <p className="mt-1 text-xs text-slate-400">
-                    Gestion des paiements, demandes administratives, duplicata et
-                    relevés de notes (version papier). Les effectifs, classes et
-                    organisation pédagogique sont sous la responsabilité de la
-                    scolarité.
+                    Gestion des paiements, demandes administratives, duplicata
+                    et relevés de notes (version papier). Les effectifs, classes
+                    et organisation pédagogique sont sous la responsabilité de
+                    la scolarité.
                   </p>
                 </div>
                 <div className="flex flex-wrap gap-3 text-xs">
@@ -210,7 +211,9 @@ async function AdministrationDashboardPage() {
                       Paiements collectés (mois en cours)
                     </p>
                     <p className="mt-1 text-lg font-semibold text-emerald-300">
-                      {paymentStats.totalCollectedThisMonth.toLocaleString("fr-DZ")}{" "}
+                      {paymentStats.totalCollectedThisMonth.toLocaleString(
+                        "fr-DZ",
+                      )}{" "}
                       DA
                     </p>
                   </div>
@@ -343,15 +346,15 @@ async function AdministrationDashboardPage() {
                                 p.status === "completed"
                                   ? "bg-emerald-500/15 text-emerald-300 border border-emerald-500/40"
                                   : p.status === "failed"
-                                  ? "bg-rose-500/10 text-rose-300 border border-rose-500/40"
-                                  : "bg-amber-500/10 text-amber-300 border border-amber-500/40"
+                                    ? "bg-rose-500/10 text-rose-300 border border-rose-500/40"
+                                    : "bg-amber-500/10 text-amber-300 border border-amber-500/40"
                               }`}
                             >
                               {p.status === "completed"
                                 ? "Validé"
                                 : p.status === "failed"
-                                ? "Échoué"
-                                : "En attente"}
+                                  ? "Échoué"
+                                  : "En attente"}
                             </span>
                           </td>
                         </tr>
@@ -398,8 +401,8 @@ async function AdministrationDashboardPage() {
                                 r.status === "Traité"
                                   ? "bg-emerald-500/15 text-emerald-300 border border-emerald-500/40"
                                   : r.status === "En cours"
-                                  ? "bg-sky-500/15 text-sky-300 border border-sky-500/40"
-                                  : "bg-amber-500/10 text-amber-300 border border-amber-500/40"
+                                    ? "bg-sky-500/15 text-sky-300 border border-sky-500/40"
+                                    : "bg-amber-500/10 text-amber-300 border border-amber-500/40"
                               }`}
                             >
                               {r.status}

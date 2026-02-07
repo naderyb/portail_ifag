@@ -1,3 +1,5 @@
+export const dynamic = "force-dynamic";
+
 export const runtime = "nodejs";
 
 import { Suspense } from "react";
@@ -185,7 +187,7 @@ async function StudentSchedulePage() {
                                         <div
                                           key={`${slot.subject}-${idx}`}
                                           className={`rounded-md border px-1.5 py-1 ${getCellColorClasses(
-                                            slot.subject
+                                            slot.subject,
                                           )}`}
                                         >
                                           <div className="font-semibold text-[11px] text-slate-50">
