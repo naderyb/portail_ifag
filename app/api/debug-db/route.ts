@@ -6,7 +6,17 @@ const pool = new Pool({
   // ssl: { rejectUnauthorized: false }, // uncomment if needed for Neon
 });
 
+// Avoid hitting the database during the production build/export phase
+const isBuildPhase = process.env.NEXT_PHASE === "phase-production-build";
+
 export async function GET() {
+  if (isBuildPhase) {
+    return NextResponse.json({
+      status: "skipped",
+      reason: "DB check disabled during build phase",
+    });
+  }
+
   try {
     // Simple connectivity check
     const result = await pool.query("SELECT 1 AS ok");
